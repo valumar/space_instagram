@@ -1,5 +1,6 @@
 import os
 import time
+import logging
 import image_utils
 
 from instabot import Bot
@@ -22,15 +23,16 @@ def remove_garbage():
     garbage_files =['blacklist', 'comments', 'followed', 'friends', 'skipped', 'unfollowed', 'whitelist']
     for file in garbage_files:
         try:
-            print(f'Removing \"{file}.txt\"')
+            logging.debug(f'Removing \"{file}.txt\"')
             os.remove(f'{file}.txt')
         except FileNotFoundError:
+            logging.exception('Exception in remove_garbage: ')
             pass
     for image in images:
         if image.find('CONVERTED') > 0:
             print(f'Removing \"{image}\"')
             os.remove(image)
-    print('All garbage removed')
+    logging.debug('All garbage removed')
 
 
 if __name__ == '__main__':
@@ -39,7 +41,8 @@ if __name__ == '__main__':
     try:
         with open('posted_pics.txt', 'r', encoding='utf8') as f:
             posted_pic_list = f.read().splitlines()
-    except Exception:
+    except FileNotFoundError:
+        logging.exception('Exception occurred')
         posted_pic_list = []
     images = image_utils.get_list_of_images()
     print(posted_pic_list)
