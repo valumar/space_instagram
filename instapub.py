@@ -1,6 +1,6 @@
 import os
 import time
-import my_funcs
+import image_utils
 
 from instabot import Bot
 from dotenv import load_dotenv
@@ -20,7 +20,7 @@ def upload_photo(image):
 # upload_photo(os.path.join('images', 'hubble', 'hubble-3875.png'))
 
 def remove_garbage():
-    images = my_funcs.get_list_of_images()
+    images = image_utils.get_list_of_images()
     garbage_files =['blacklist', 'comments', 'followed', 'friends', 'skipped', 'unfollowed', 'whitelist']
     for file in garbage_files:
         try:
@@ -42,7 +42,7 @@ if __name__ == '__main__':
             posted_pic_list = f.read().splitlines()
     except Exception:
         posted_pic_list = []
-    images = my_funcs.get_list_of_images()
+    images = image_utils.get_list_of_images()
     print(posted_pic_list)
     for image in images:
         if image not in posted_pic_list:

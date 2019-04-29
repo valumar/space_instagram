@@ -1,7 +1,7 @@
 import requests
 import os.path
 
-import my_funcs
+import image_utils
 
 
 HUBBLE_COLLECTIONS = [
@@ -18,7 +18,7 @@ def fetch_hubble_image(image_id, collection):
     url = f'http://hubblesite.org/api/v3/image/{image_id}'
     response = requests.get(url)
     image_url = response.json()['image_files'][-1]['file_url']
-    my_funcs.get_image(image_url, 'hubble', f'hubble-{collection}-{image_id}{os.path.splitext(image_url)[-1]}')
+    image_utils.get_image(image_url, 'hubble', f'hubble-{collection}-{image_id}{os.path.splitext(image_url)[-1]}')
 
 
 def get_image_ids_from_hubble_collection(collection):
