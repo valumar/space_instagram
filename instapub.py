@@ -17,8 +17,6 @@ def upload_photo(image):
     bot.upload_photo(image)
 
 
-# upload_photo(os.path.join('images', 'hubble', 'hubble-3875.png'))
-
 def remove_garbage():
     images = image_utils.get_list_of_images()
     garbage_files =['blacklist', 'comments', 'followed', 'friends', 'skipped', 'unfollowed', 'whitelist']
@@ -33,6 +31,7 @@ def remove_garbage():
             print(f'Removing \"{image}\"')
             os.remove(image)
     print('All garbage removed')
+
 
 if __name__ == '__main__':
     remove_garbage()
