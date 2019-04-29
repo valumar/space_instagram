@@ -45,7 +45,7 @@ if __name__ == '__main__':
         logging.exception('Exception occurred')
         posted_pic_list = []
     images = image_utils.get_list_of_images()
-    print(posted_pic_list)
+    logging.debug(posted_pic_list)
     for image in images:
         if image not in posted_pic_list:
             upload_photo(image)
