@@ -17,15 +17,17 @@ HUBBLE_COLLECTIONS = [
 def fetch_hubble_image(image_id, collection):
     url = f'http://hubblesite.org/api/v3/image/{image_id}'
     response = requests.get(url)
-    image_url = response.json()['image_files'][-1]['file_url']
-    image_utils.get_image(image_url, 'hubble', f'hubble-{collection}-{image_id}{os.path.splitext(image_url)[-1]}')
+    if response.ok:
+        image_url = response.json()['image_files'][-1]['file_url']
+        image_utils.get_image(image_url, 'hubble', f'hubble-{collection}-{image_id}{os.path.splitext(image_url)[-1]}')
 
 
 def get_image_ids_from_hubble_collection(collection):
     url = f'http://hubblesite.org/api/v3/images/{collection}'
     response = requests.get(url)
-    image_ids = [image['id'] for image in response.json()]
-    return image_ids
+    if response.ok:
+        image_ids = [image['id'] for image in response.json()]
+        return image_ids
 
 
 def get_all_hubble_images():
