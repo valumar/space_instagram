@@ -16,11 +16,6 @@ def get_image(url, api_name, filename):
         file.write(response.content)
 
 
-def get_image_extension(url):
-    extension = url.split('.')[-1]
-    return extension
-
-
 def get_list_of_images():
     images = []
     for root, subs, files in os.walk(IMAGE_FOLDER):
