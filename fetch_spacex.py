@@ -6,8 +6,9 @@ import image_utils
 def get_spacex_list_of_images():
     url = 'https://api.spacexdata.com/v3/launches/latest'
     response = requests.get(url)
-    images = response.json()['links']['flickr_images']
-    return images
+    if response.ok:
+        images = response.json()['links']['flickr_images']
+        return images
 
 
 def fetch_spacex_last_launch():
